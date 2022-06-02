@@ -1,0 +1,1 @@
+This terraform script creates ec2-instance with very basic terraform structure
