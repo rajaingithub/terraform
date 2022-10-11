@@ -8,7 +8,8 @@ terraform {
   required_version = ">=0.14.9"
 }
 provider "aws" {
-  profile = "Pavancreds"
+  access_key="AKIASN2SOO2VIGRYPWGF"
+secret_key="Lbt9U/WhPyNsc1hmu+dlaOqicInMBlHxiQd0/AD1"
   region  = "us-east-1"
 }
 resource "aws_instance" "example_instance" {
@@ -18,4 +19,19 @@ resource "aws_instance" "example_instance" {
   tags = {
     "Name" = "example instance"
   }
+}
+
+data "aws_instance" "example_instance_2" {
+  
+   filter {
+    name   = "tag:Name"
+    values = ["example instance 2"]
+  }
+ 
+}
+
+resource "aws_ec2_tag" "project" {
+  resource_id = data.aws_instance.example_instance_2.id
+  key = "Project"
+  value = "personal"
 }
